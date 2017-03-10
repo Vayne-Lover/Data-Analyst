@@ -15,6 +15,15 @@ def func_read_csv(file, *args):
     # print(result1,result2)
     return (result1, result2)
 
+def func_generate_d(list1, list2):
+    result = []
+    length1 = len(list1)
+    length2 = len(list2)
+    length = length1  if length1 <= length2 else length2
+    for i in range(length):
+        result.append(list2[i] - list1[i])
+    return result
+
 def calc_mean(list_para):
     result = 0.0
     length = len(list_para)
@@ -55,8 +64,10 @@ def func_print_result(list_para):
 
 def main():
     result1, result2 = func_read_csv("stroopdata.csv", "Congruent", "Incongruent")
+    result3 = func_generate_d(result1, result2)
     func_print_result(calc_statistics(result1))
     func_print_result(calc_statistics(result2))
+    func_print_result(calc_statistics(result3))
 
 if __name__ == "__main__":
     try:
