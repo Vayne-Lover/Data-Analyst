@@ -3,15 +3,15 @@
 import csv
 import math
 
-def func_read_csv(file,*args):
+def func_read_csv(file, *args):
     result1 = []
     result2 = []
 
     with open(file) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            result1.append(float(row["Congruent"]))
-            result2.append(float(row["Incongruent"]))
+            result1.append(float(row[args[0]]))
+            result2.append(float(row[args[1]]))
     # print(result1,result2)
     return (result1, result2)
 
@@ -35,18 +35,23 @@ def calc_standard_variance(var_para):
     return math.sqrt(var_para)
 
 def calc_statistics(list_para):
+    min1 = min(list_para)
+    max1 = max(list_para)
     mean1 = calc_mean(list_para)
     var1 = calc_variance(list_para, mean1)
     sd1 = calc_standard_variance(var1)
-    return [mean1, var1, sd1]
+    return [min1, max1, mean1, var1, sd1]
 
 def func_print_result(list_para):
-    print("*" * 10)
+    print("*" * 20)
     print("Print statistics")
-    print("Mean is :", list_para[0])
-    print("Variance is :", list_para[1])
-    print("SD is :", list_para[2])
-    print("*" * 10)
+    print("Min is :", list_para[0])
+    print("Max is :", list_para[1])
+    print("Mean is :", list_para[2])
+    print("Variance is :", list_para[3])
+    print("Standard Deviation is :", list_para[4])
+    print("*" * 20)
+    print(" ")
 
 def main():
     result1, result2 = func_read_csv("stroopdata.csv", "Congruent", "Incongruent")
